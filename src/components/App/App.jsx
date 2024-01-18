@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './App.css';
+import { useDispatch } from 'react-redux';
+import ToggleAdd from '../ToggleButton/ToggleButton.';
 import RenderPizza from '../RenderPizza/RenderPizza';
 
 // imports at the top - useEffect, useState, axios, React
@@ -11,7 +13,8 @@ import RenderPizza from '../RenderPizza/RenderPizza';
 // set these to const variables, getter and setter
 // useState([]) - empty array for starting
 const App = () => {
-  const [pizzas, setPizzas] = useState([]);
+  // const [pizzas, setPizzas] = useState([]);
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
@@ -20,7 +23,7 @@ const App = () => {
       .get("/api/pizza")
       // setPizzas to the response data
       .then((res) => {
-        setPizzas(res.data);
+        dispatch({type: 'SET_PIZZAS', payload:res.data});
         console.log(response.data);
       })
       // catch any errors
@@ -28,6 +31,11 @@ const App = () => {
         console.log(error);
       });
   }, []);
+
+  
+
+
+
 
   return (
     <div className="App">
@@ -37,12 +45,8 @@ const App = () => {
 
       <img src="images/pizza_photo.png" />
       <p>Pizza is great.</p>
-
-      
       <RenderPizza />
   
-
-
     </div>
   );
 };
