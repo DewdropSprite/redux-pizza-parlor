@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const HandleAdd = ({}) => {
+const ToggleAdd = ({}) => {
     const [toggle, setToggle] = useState(true);
     const handleClick = () => {
     setToggle((prevToggle) => !prevToggle);
@@ -18,4 +18,4 @@ const HandleAdd = ({}) => {
 
   );
 }
-export default HandleAdd
+export default ToggleAdd
