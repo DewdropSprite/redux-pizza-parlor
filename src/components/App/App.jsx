@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './App.css';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import HandleAdd from '../ToggleButton/ToggleButton.';
 import ToggleAdd from '../ToggleButton/ToggleButton.';
+import RenderPizza from '../RenderPizza/RenderPizza';
 
-function App() {
+// imports at the top - useEffect, useState, axios, React
+
+
+
+// set these to const variables, getter and setter
+// useState([]) - empty array for starting
+const App = () => {
+  const [pizzas, setPizzas] = useState([]);
+
+
+  useEffect(() => {
+    // GET request to /api/pizzas
+    axios
+      .get("/api/pizza")
+      // setPizzas to the response data
+      .then((res) => {
+        setPizzas(res.data);
+        console.log(response.data);
+      })
+      // catch any errors
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   
 
@@ -14,22 +37,16 @@ function App() {
 
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1 className='App-title'>Prime Pizza</h1>
+    <div className="App">
+      <header className="App-header">
+        <h1 className="App-title">Prime Pizza</h1>
       </header>
-  
-      <img src='images/pizza_photo.png' />
+
+      <img src="images/pizza_photo.png" />
       <p>Pizza is great.</p>
-      <div className='pizzaItem'>
-        <h3>Pizza Title</h3>
-        <p>This is how good the pizza is!</p>
-        <p>Total:</p>
-        <ToggleAdd />
-      </div>
   
     </div>
   );
-}
+};
 
 export default App;
