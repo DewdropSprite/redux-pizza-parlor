@@ -1,3 +1,5 @@
+DROP IF EXISTS TABLE "pizza";
+
 CREATE TABLE "pizza" (
 	"id" SERIAL PRIMARY KEY,
 	-- "id" isnt represneted typically cause it's a serial primary key
