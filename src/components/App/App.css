@@ -13,3 +13,7 @@
 .App-title {
   font-size: 2em;
 }
+
+.pizzaItem{
+  border: 2px black solid;
+}
