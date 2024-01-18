@@ -13,7 +13,8 @@ import RenderPizza from '../RenderPizza/RenderPizza';
 // set these to const variables, getter and setter
 // useState([]) - empty array for starting
 const App = () => {
-  const [pizzas, setPizzas] = useState([]);
+  // const [pizzas, setPizzas] = useState([]);
+  const dispatch = useDispatch()
 
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const App = () => {
       .get("/api/pizza")
       // setPizzas to the response data
       .then((res) => {
-        setPizzas(res.data);
+        dispatch({type: 'SET_PIZZAS', payload:res.data});
         console.log(response.data);
       })
       // catch any errors
@@ -44,6 +45,7 @@ const App = () => {
 
       <img src="images/pizza_photo.png" />
       <p>Pizza is great.</p>
+      <RenderPizza />
   
     </div>
   );
