@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState} from "react";
+import { useState } from "react";
 
 // let pizzaArray =[{
 //     id: 1,
@@ -27,37 +27,52 @@ import { useState} from "react";
 // }]
 
 function RenderPizza() {
+    //! Local State
     const [toggle, setToggle] = useState(true);
-    // total cost in store
+    // const [totalPrice, setTotalPrice] = useState(0);
 
-    const dispatch = useDispatch();
+    //! Global State
     const pizzaList = useSelector((store) => store.pizzas);
     const shoppingCart = useSelector((store) => store.itemsInCart);
+    // const totalPrice = useSelector((store) => store.priceInCart);
+    const dispatch = useDispatch();
 
-    console.log(pizzaList);
+    // console.log(pizzaList);
+    // console.log("total pizza cost:", totalPrice);
 
-    const addPriceToTotal = () => {
-        // take the total and add the price of the current (pizza.price)
-        // go through the pizza list array, accessing the price properties
-        // then we add all of the values together and return the amount.
+    // // Calculate the total price of all of the pizzas in the cart
+    // const calculateTotalPriceInCart = () => {
 
-        
-        //! Below is code that is going to be used, commented for now
-        // let total = pizzaList.reduce((accumulator, currentValue) => {
-        //     return accumulator + currentValue;
-        // }, initialValue = 0)
-        
+    //     console.log("calculateTotalPriceInCart() called");
+    //     let newTotalPrice = 0;
+    //     // if pizza in cart, add prices then return total
+    //     if (shoppingCart.length > 0) {
+    //         newTotalPrice = pizzaList.reduce((accumulator, currentValue) => {
+    //             return accumulator + currentValue.price;
+    //         });
+    //     }
+    //     // else return a value of zero
+    //     return newTotalPrice;
+    // };
+
+    const addPizzaToCart = (pizza) => {
+        // add the pizza to the cart
+        dispatch({
+            type: "ADD_PIZZA_TO_CART",
+            payload: pizza,
+        });
+
+        // // set the global cart cost
         // dispatch({
-        //     type: "ADD_PIZZA_TO_CART",
-        //     payload: total
+        //     type: "SET_TOTAL",
+        //     payload: calculateTotalPriceInCart()
         // })
-
-
+        
         //set the boolean toggle to opp
         setToggle(!toggle);
-    }
+    };
 
-    const subtractPriceFromTotal = () => {
+    const removePizzaFromCart = (pizza) => {
         //take the total and subtract the price of the current (pizza.price)
 
         // The idea is to take the list the represent the pizzas in the cart,
@@ -65,22 +80,19 @@ function RenderPizza() {
         // for the pizza that this button was clicked on, then dispatch new total
         // and then flip the boolean
 
-
         //! Below is code that is going to be used, commented for now
         // let newTotal = pizzaList.reduce((accumulator, currentValue) => {
         //     return accumulator - currentValue;
         // }, initialValue = 0)
-        
+
         // dispatch({
         //     type: "SUBTRACT_PIZZA_FROM_CART",
         //     payload: total
         // }
 
-
-
         //set the boolean toggle to opp
         setToggle(!toggle);
-    }
+    };
 
     return (
         <section>
@@ -91,12 +103,20 @@ function RenderPizza() {
                         <li>{pizza.name}</li>
                         <li>{pizza.description}</li>
                         <li>{pizza.price}</li>
-                        <li><img src={pizza.image_path} /></li>
+                        <li>
+                            <img src={pizza.image_path} />
+                        </li>
                         <li>
                             {toggle ? (
-                                <button onClick={addPriceToTotal}>Add</button>
+                                <button onClick={() => addPizzaToCart(pizza)}>
+                                    Add
+                                </button>
                             ) : (
-                                <button onClick={subtractPriceFromTotal}>Remove</button>
+                                <button
+                                    onClick={() => removePizzaFromCart(pizza)}
+                                >
+                                    Remove
+                                </button>
                             )}
                         </li>
                     </ul>

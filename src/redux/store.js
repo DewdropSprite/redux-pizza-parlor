@@ -20,17 +20,18 @@ const itemsInCart = (state = [], action) => {
     return state;
 };
 
-const priceInCart = (state = [], action) => {
-if (condition) {
-  
-}
+const priceInCart = (state = 0, action) => {
+  if (action.type === "SET_TOTAL") {
+    return action.payload;
+  }
 return state
-}
+};
 
 const store = createStore(
     combineReducers({
         pizzas,
         itemsInCart,
+        priceInCart
     }),
     applyMiddleware(logger)
 );

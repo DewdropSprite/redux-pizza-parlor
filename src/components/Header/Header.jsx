@@ -1,8 +1,8 @@
-import {useState} from "react";
+import {useSelector} from "react-redux";
 
 const Header = () => {
     
-    const [totalPrice, setTotalPrice] = useState(0);
+    const totalPrice = useSelector((store) => store.priceInCart);
     
     
     return (
