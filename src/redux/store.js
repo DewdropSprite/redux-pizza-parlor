@@ -10,28 +10,20 @@ const pizzas = (state = [], action) => {
 
 const itemsInCart = (state = [], action) => {
     if (action.type === "ADD_PIZZA_TO_CART") {
-        console.log("[ADD_PRICE] payload:", action.payload);
+        console.log("[ADD_PIZZA_TO_CART] payload:", action.payload);
         return action.payload;
     } else if (action.type === "SUBTRACT_PIZZA_FROM_CART") {
-        console.log("[SUBTRACT_PRICE] payload:", action.payload);
+        console.log("[SUBTRACT_PIZZA_FROM_CART] payload:", action.payload);
         return action.payload;
     }
 
     return state;
 };
 
-const priceInCart = (state = 0, action) => {
-  if (action.type === "SET_TOTAL") {
-    return action.payload;
-  }
-return state
-};
-
 const store = createStore(
     combineReducers({
         pizzas,
-        itemsInCart,
-        priceInCart
+        itemsInCart
     }),
     applyMiddleware(logger)
 );

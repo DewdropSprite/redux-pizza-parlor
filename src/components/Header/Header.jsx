@@ -1,9 +1,16 @@
-import {useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import calculateTotalPriceInCart from "../../utils/functions";
 
 const Header = () => {
     
-    const totalPrice = useSelector((store) => store.priceInCart);
-    
+    const [totalPrice, setTotalPrice] = useState(0);
+    const cart = useSelector((state) => state.itemsInCart);
+
+    useEffect(() => {
+        setTotalPrice(calculateTotalPriceInCart(cart));
+    }, [cart])
     
     return (
         <header className="App-header">
