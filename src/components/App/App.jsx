@@ -4,6 +4,7 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import PizzaList from "../PizzaList.jsx/PizzaList";
 import Header from "../Header/Header";
+import CustInfoForm from "../CustInfoForm/CustInfoForm";
 
 // imports at the top - useEffect, useState, axios, React
 
@@ -37,6 +38,7 @@ const App = () => {
     return (
         <div className="App">
             <Header />
+            <CustInfoForm />
             <PizzaList />
         </div>
     );
