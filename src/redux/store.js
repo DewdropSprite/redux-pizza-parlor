@@ -24,8 +24,8 @@ const priceInCart = (state = [], action) => {
 if (condition) {
   
 }
-}
 return state
+}
 
 const store = createStore(
     combineReducers({
